@@ -3,4 +3,8 @@
     <string name="create_account_label">Create Account</string>
     <string name="join_the_community_label">Join The Quizzing Community</string>
     <string name="username_textfield">Username</string>
+
+    <string name="nav_game">Game</string>
+
+
 </resources>
