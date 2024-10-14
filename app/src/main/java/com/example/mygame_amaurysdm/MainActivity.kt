@@ -6,10 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.AppTheme
+import com.example.mygame_amaurysdm.ui.theme.AppTheme
 import com.example.mygame_amaurysdm.navigation.UserCreationNavigation
 
-// import com.example.mygame_amaurysdm.ui.theme.MyGame_AmaurysDMTheme
+//import com.example.mygame_amaurysdm.ui.theme.MyGame_AmaurysDMTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,11 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                    val navController = rememberNavController()
-                    UserCreationNavigation(
-                        navController = navController,
-                    )
-
+                val navController = rememberNavController()
+                UserCreationNavigation(
+                    navController = navController,
+                )
             }
         }
     }

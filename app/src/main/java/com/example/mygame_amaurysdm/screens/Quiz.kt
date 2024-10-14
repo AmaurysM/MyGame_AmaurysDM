@@ -1,6 +1,7 @@
 package com.example.mygame_amaurysdm.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -27,21 +30,26 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.model.QuizQuestions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
 fun Quiz(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    QuizQuestions: QuizQuestions = QuizQuestions()
+    quizQuestions: QuizQuestions = QuizQuestions()
 ) {
-    val questions = QuizQuestions.getQuestions()
-    val scrollable = remember { mutableStateOf(false) }
+    val questions = quizQuestions.getQuestions()
+    val listState = rememberLazyListState()
+    // val scrollable = remember { mutableStateOf(false) }
     LazyRow(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(10.dp)
+            .padding(10.dp),
+        userScrollEnabled = false
     ) {
         items(questions) { question ->
             Card(
@@ -74,7 +82,6 @@ fun Quiz(
                                 selected = checkedState,
                                 onClick = { checkedState = !checkedState },
                                 colors = RadioButtonDefaults.colors()
-
                             )
 
                         }
@@ -83,7 +90,21 @@ fun Quiz(
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(10.dp)
                         )
+
                     }
+
+                }
+                var nextItem = (listState.firstVisibleItemIndex + 1)
+                Button(
+                    onClick = {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            listState.animateScrollToItem(nextItem)
+                        }
+                    }
+                    , modifier = Modifier
+                        .background(MaterialTheme.colorScheme.primary)
+                ) {
+                    Text(text = "Next")
                 }
             }
         }
