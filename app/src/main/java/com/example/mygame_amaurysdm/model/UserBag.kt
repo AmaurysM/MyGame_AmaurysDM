@@ -5,7 +5,7 @@ import java.util.TreeSet
 object UserBag {
     private val users = mutableListOf<User>();
     private var usersCount = 0;
-    private var currentUser: User? = null;
+    private var currentUser: User = User("","", "");
 
     fun addUser(user: User) {
         users.add(user)
@@ -17,7 +17,7 @@ object UserBag {
         usersCount--
     }
 
-    fun getCurrentUser(): User? {
+    fun getCurrentUser(): User {
         return currentUser
     }
 

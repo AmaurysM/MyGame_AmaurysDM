@@ -1,5 +1,8 @@
 package com.example.mygame_amaurysdm.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +21,7 @@ import com.example.mygame_amaurysdm.model.checkRegister
 import com.example.mygame_amaurysdm.screens.HomeScreen
 import com.example.mygame_amaurysdm.screens.usercreation.LoginScreen
 import com.example.mygame_amaurysdm.screens.usercreation.RegisterScreen
+import com.example.mygame_amaurysdm.ui.theme.AppTheme
 
 @Preview(showBackground = true)
 @Composable
@@ -31,7 +35,7 @@ fun UserCreationNavigation(
     NavHost(
         navController = navController,
         startDestination = "register",
-        modifier = modifier
+        modifier = modifier.background(MaterialTheme.colorScheme.background).fillMaxSize()
     ) {
 
 
@@ -76,9 +80,13 @@ fun UserCreationNavigation(
         }
 
         composable(route = "home") {
-            HomeScreen()
+            val innerViewNavController = rememberNavController()
+            HomeScreen(
+                modifier = modifier
+                , navController = innerViewNavController
+                , userPicClick = { innerViewNavController.navigate("settings_Screen") }
+                , onLogoClick = { innerViewNavController.navigate("intro_Screen") }
+            )
         }
-
-
     }
 }

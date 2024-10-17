@@ -9,8 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.ui.theme.AppTheme
 import com.example.mygame_amaurysdm.navigation.UserCreationNavigation
 
-//import com.example.mygame_amaurysdm.ui.theme.MyGame_AmaurysDMTheme
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
