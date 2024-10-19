@@ -39,16 +39,9 @@ fun Quiz(
 
 
     QuizGameScreen(
-        modifier
-        , navController
-        , quiz
-        , selectedOption = selectedOption
-        , onOptionSelected = {
+        modifier, navController, quiz, selectedOption = selectedOption, onOptionSelected = {
             selectedOption = it
-        }
-        , currentQuestionIndex = currentQuestionIndex
-        , buttonText = buttonText
-        , onNextClick = {
+        }, currentQuestionIndex = currentQuestionIndex, buttonText = buttonText, onNextClick = {
             if (checkAnswer(
                     listOf(selectedOption),
                     quiz.questions[currentQuestionIndex]
@@ -70,7 +63,6 @@ fun Quiz(
 }/**/
 
 
-
 @Composable
 fun RadioOption(option: String, selected: Boolean, onOptionSelected: (String) -> Unit) {
     Row() {
@@ -87,6 +79,7 @@ fun RadioOption(option: String, selected: Boolean, onOptionSelected: (String) ->
     }
 
 }
+
 @Composable
 fun NextButton(onButtonClick: () -> Unit, text: String) {
     Column(
