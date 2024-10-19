@@ -4,10 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-
 import androidx.navigation.compose.rememberNavController
-import com.example.mygame_amaurysdm.ui.theme.AppTheme
 import com.example.mygame_amaurysdm.navigation.UserCreationNavigation
+import com.example.mygame_amaurysdm.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mygame_amaurysdm.R
-import com.example.mygame_amaurysdm.model.RegisterData
+import com.example.mygame_amaurysdm.viewmodel.RegisterData
 
 @Preview(showBackground = true, device = "id:pixel_8a")
 @Composable
@@ -39,8 +39,7 @@ fun RegisterScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(5.dp)
-        , horizontalAlignment = Alignment.CenterHorizontally
+            .padding(5.dp), horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
         Spacer(modifier = Modifier.height(100.dp))
@@ -48,13 +47,11 @@ fun RegisterScreen(
         Text(
             text = stringResource(id = R.string.app_name),
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
-            , color = MaterialTheme.colorScheme.primary
+            fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary
         )
         Text(
             text = stringResource(id = R.string.join_the_community_label),
-            style = MaterialTheme.typography.bodyMedium
-            , color = MaterialTheme.colorScheme.primary
+            style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -62,9 +59,7 @@ fun RegisterScreen(
         OutlinedTextField(
             value = registrationData.username,
             onValueChange = { onRegistrationChange(registrationData.copy(username = it)) },
-            label = { Text(text = "USERNAME") }
-
-            , modifier = Modifier
+            label = { Text(text = "USERNAME") }, modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp)
 
@@ -100,18 +95,18 @@ fun RegisterScreen(
 
         Row() {
             Text(
-                text = "Already have an account?"
-                , fontWeight = FontWeight.Thin
-                , color = MaterialTheme.colorScheme.primary
+                text = "Already have an account?",
+                fontWeight = FontWeight.Thin,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = "Login"
-                , fontWeight = FontWeight.Thin
-                , modifier = Modifier
+                text = "Login",
+                fontWeight = FontWeight.Thin,
+                modifier = Modifier
                     .clickable { onLoginClick() }
-                    .padding(start = 5.dp)
-                , color = MaterialTheme.colorScheme.primary
-                , textDecoration = TextDecoration.Underline
+                    .padding(start = 5.dp),
+                color = MaterialTheme.colorScheme.primary,
+                textDecoration = TextDecoration.Underline
             )
         }
     }

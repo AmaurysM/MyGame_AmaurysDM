@@ -24,40 +24,38 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mygame_amaurysdm.R
-import com.example.mygame_amaurysdm.model.LoginData
+import com.example.mygame_amaurysdm.viewmodel.LoginData
 
 
 @Preview(showBackground = true, device = "id:pixel_8a")
 @Composable
 fun LoginScreen(
-    loginData: LoginData = LoginData("email@example.com", "******")
-    , onLoginChange: (LoginData) -> Unit = {}
-    , onCreateAccountClick: () -> Unit = {}
-    , onLoginClick: () -> Unit = {}
-){
+    loginData: LoginData = LoginData("email@example.com", "******"),
+    onLoginChange: (LoginData) -> Unit = {},
+    onCreateAccountClick: () -> Unit = {},
+    onLoginClick: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(5.dp)
-        , horizontalAlignment = Alignment.CenterHorizontally
+            .padding(5.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(100.dp))
 
         Text(
-            text = stringResource(id = R.string.app_name)
-            , fontSize = 30.sp
-            , fontWeight = FontWeight.Bold
-            , color = MaterialTheme.colorScheme.primary
+            text = stringResource(id = R.string.app_name),
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
-            text = stringResource(id = R.string.join_the_community_label)
-            , style = MaterialTheme.typography.bodyMedium
-            , color = MaterialTheme.colorScheme.primary
+            text = stringResource(id = R.string.join_the_community_label),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-
 
         OutlinedTextField(
             value = loginData.email,
@@ -90,9 +88,9 @@ fun LoginScreen(
 
         Row() {
             Text(
-                text = "Don't have an account?"
-                , fontWeight = FontWeight.Thin
-                , color = MaterialTheme.colorScheme.primary
+                text = "Don't have an account?",
+                fontWeight = FontWeight.Thin,
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = "Create One",
@@ -100,8 +98,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .clickable { onCreateAccountClick() }
                     .padding(start = 5.dp),
-                color = MaterialTheme.colorScheme.primary
-                , textDecoration = TextDecoration.Underline
+                color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline
             )
         }
     }

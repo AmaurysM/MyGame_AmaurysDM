@@ -1,11 +1,9 @@
 package com.example.mygame_amaurysdm.model
 
-import java.util.TreeSet
-
 object UserBag {
     private val users = mutableListOf<User>();
     private var usersCount = 0;
-    private var currentUser: User = User("","", "");
+    private var currentUser: User = User("", "", "");
 
     fun addUser(user: User) {
         users.add(user)
@@ -32,7 +30,7 @@ object UserBag {
     }
 
     fun getUser(filter: (User) -> Boolean): List<User> {
-        return users.filter { filter(it)}
+        return users.filter { filter(it) }
     }
 
 }
