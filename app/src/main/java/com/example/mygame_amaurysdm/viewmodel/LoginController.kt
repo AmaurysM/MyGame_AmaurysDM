@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.mygame_amaurysdm.model.UserBag
+import com.example.mygame_amaurysdm.navigation.UserCreationDestinations
 import com.example.mygame_amaurysdm.screens.usercreation.LoginScreen
 
 data class LoginData(var email: String, var password: String)
@@ -19,7 +20,7 @@ fun Login(modifier: Modifier, navController: NavHostController) {
         loginData = loginData,
         onLoginChange = { newLoginData -> loginData = newLoginData },
         onCreateAccountClick = {
-            navController.navigate("register") {
+            navController.navigate(UserCreationDestinations.REGISTER) {
                 popUpTo(navController.graph.startDestinationId) {
                     inclusive = true
                 }
@@ -27,7 +28,7 @@ fun Login(modifier: Modifier, navController: NavHostController) {
         },
         onLoginClick = {
             if (checkLogin(loginData)) {
-                navController.navigate("home") {
+                navController.navigate(UserCreationDestinations.HOME) {
                     popUpTo(navController.graph.startDestinationId) {
                         inclusive = true
                     }

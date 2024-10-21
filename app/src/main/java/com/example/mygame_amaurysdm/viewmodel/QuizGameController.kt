@@ -39,9 +39,15 @@ fun Quiz(
 
 
     QuizGameScreen(
-        modifier, navController, quiz, selectedOption = selectedOption, onOptionSelected = {
+        modifier
+        , navController
+        , quiz
+        , selectedOption = selectedOption
+        , onOptionSelected = {
             selectedOption = it
-        }, currentQuestionIndex = currentQuestionIndex, buttonText = buttonText, onNextClick = {
+        }, currentQuestionIndex = currentQuestionIndex
+        , buttonText = buttonText
+        , onNextClick = {
             if (checkAnswer(
                     listOf(selectedOption),
                     quiz.questions[currentQuestionIndex]

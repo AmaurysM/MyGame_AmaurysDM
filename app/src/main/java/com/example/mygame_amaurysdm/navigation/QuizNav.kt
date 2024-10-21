@@ -10,31 +10,47 @@ import com.example.mygame_amaurysdm.screens.quiz.IntroScreen
 import com.example.mygame_amaurysdm.screens.quiz.ResultScreen
 import com.example.mygame_amaurysdm.viewmodel.Quiz
 
+object QuizDestinations {
+    const val INTRO = "intro_Screen"
+    const val GAME = "game_Screen"
+    const val RESULT = "result_Screen"
+    const val SETTINGS = "settings_Screen"
+}
 
 @Composable
 fun QuizNav(modifier: Modifier = Modifier, navController: NavHostController) {
     NavHost(
-        navController = navController, startDestination = "intro_Screen"
+        navController = navController
+        , startDestination = QuizDestinations.INTRO
     ) {
 
-        composable(route = "intro_Screen") {
-            IntroScreen(modifier = modifier, navController = navController)
+        composable(route = QuizDestinations.INTRO) {
+            IntroScreen(
+                modifier = modifier
+                , navController = navController)
         }
 
-        composable(route = "game_Screen") {
+        composable(route = QuizDestinations.GAME) {
             Quiz(
-                modifier = modifier,
-                navController = navController,
+                modifier = modifier
+                , navController = navController,
             )
         }
 
-        composable(route = "result_Screen") {
+        composable(route = QuizDestinations.RESULT) {
 
-            ResultScreen(modifier = modifier, navController = navController)
+            ResultScreen(
+                modifier = modifier
+                , navController = navController
+            )
         }
 
-        composable(route = "settings_Screen") {
-            SettingsScreen(modifier = modifier, navController = navController)
+        composable(route = QuizDestinations.SETTINGS) {
+            SettingsScreen(
+                modifier = modifier
+                , navController = navController
+            )
         }
     }
 }
+
