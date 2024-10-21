@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.screens.HomeScreen
+import com.example.mygame_amaurysdm.screens.SplashScreen
 import com.example.mygame_amaurysdm.screens.usercreation.OptionScreen
 import com.example.mygame_amaurysdm.viewmodel.Login
 import com.example.mygame_amaurysdm.viewmodel.Register
@@ -20,6 +21,7 @@ object UserCreationDestinations {
     const val REGISTER = "register"
     const val HOME = "home"
     const val INTRO_OPTION = "Option_Screen"
+    const val SPLASH = "splash"
 }
 
 @Preview(showBackground = true)
@@ -31,12 +33,15 @@ fun UserCreationNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = UserCreationDestinations.INTRO_OPTION,
+        startDestination = UserCreationDestinations.SPLASH,
         modifier = modifier
             .background(MaterialTheme.colorScheme.background)
             .fillMaxSize()
     ) {
 
+        composable(UserCreationDestinations.SPLASH) {
+            SplashScreen(navController)
+        }
         composable(UserCreationDestinations.INTRO_OPTION) {
             OptionScreen(
                 registerButton = {
