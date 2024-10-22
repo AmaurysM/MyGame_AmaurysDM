@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.model.Question
 import com.example.mygame_amaurysdm.model.Quiz
+import com.example.mygame_amaurysdm.viewmodel.CheckBoxOption
 import com.example.mygame_amaurysdm.viewmodel.NextButton
 import com.example.mygame_amaurysdm.viewmodel.RadioOption
 
@@ -26,8 +27,7 @@ fun QuizGameScreen(
     navController: NavHostController = rememberNavController(),
     quiz: Quiz,
     onNextClick: () -> Unit = {},
-    onOptionSelected: (String) -> Unit = {},
-    selectedOption: String,
+    selectedOptions: MutableList<String>,
     currentQuestionIndex: Int,
     buttonText: String
 ) {
@@ -45,7 +45,7 @@ fun QuizGameScreen(
         ) {
 
             QuestionContent(
-                quiz.questions[currentQuestionIndex], selectedOption, onOptionSelected
+                quiz.questions[currentQuestionIndex], selectedOptions
             )
             NextButton(onButtonClick = {
                 onNextClick()
@@ -57,7 +57,7 @@ fun QuizGameScreen(
 
 @Composable
 fun QuestionContent(
-    question: Question, selectedOption: String, onOptionSelected: (String) -> Unit
+    question: Question, selectedOptions: MutableList<String>
 ) {
     Column {
         Text(
@@ -66,9 +66,14 @@ fun QuestionContent(
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(bottom = 10.dp)
         )
-        question.qOptions.forEach { option ->
-            RadioOption(option, option == selectedOption) {
-                onOptionSelected(it)
+        selectedOptions.clear()
+        if (question.qAnswer.size == 1) {
+            question.qOptions.forEach { option ->
+                RadioOption(option, selectedOptions)
+            }
+        }else {
+            question.qOptions.forEach { option ->
+                CheckBoxOption(option, selectedOptions)
             }
         }
     }

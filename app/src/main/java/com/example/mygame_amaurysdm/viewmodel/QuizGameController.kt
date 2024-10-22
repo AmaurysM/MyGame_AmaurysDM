@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,7 +35,7 @@ fun Quiz(
     )
 ) {
     var currentQuestionIndex by remember { mutableIntStateOf(0) }
-    var selectedOption by remember { mutableStateOf("") }
+    val selectedOptions = remember { mutableStateListOf<String>() }
     var score by remember { mutableIntStateOf(0) }
     var buttonText by remember { mutableStateOf("Next") }
 
@@ -42,19 +44,18 @@ fun Quiz(
         modifier
         , navController
         , quiz
-        , selectedOption = selectedOption
-        , onOptionSelected = {
-            selectedOption = it
-        }, currentQuestionIndex = currentQuestionIndex
+        , selectedOptions = selectedOptions
+        , currentQuestionIndex = currentQuestionIndex
         , buttonText = buttonText
         , onNextClick = {
-            if (checkAnswer(
-                    listOf(selectedOption),
+            if (
+                checkAnswer(
+                    selectedOptions,
                     quiz.questions[currentQuestionIndex]
                 )
             ) score++
 
-            if (selectedOption == "") {
+            if (selectedOptions.isEmpty()) {
                 ; // if no option is selected do nothing
             } else if (currentQuestionIndex < quiz.questions.size - 1) {
                 currentQuestionIndex++
@@ -70,10 +71,14 @@ fun Quiz(
 
 
 @Composable
-fun RadioOption(option: String, selected: Boolean, onOptionSelected: (String) -> Unit) {
+fun RadioOption(option: String, selectedOptions: MutableList<String>) {
     Row() {
         RadioButton(
-            selected = selected, onClick = { onOptionSelected(option) }
+            selected = selectedOptions.contains(option)
+            , onClick = {
+                selectedOptions.clear();
+                selectedOptions.add(option)
+            }
         )
 
         Text(
@@ -83,7 +88,30 @@ fun RadioOption(option: String, selected: Boolean, onOptionSelected: (String) ->
             modifier = Modifier.padding(10.dp)
         )
     }
+}
 
+@Composable
+fun CheckBoxOption(option: String, selectedOptions: MutableList<String>) {
+    Row() {
+        Checkbox(
+            checked = selectedOptions.contains(option)
+            , onCheckedChange = {
+                //if (checked) selectedOptions.clear()
+                if (selectedOptions.contains(option)) {
+                    selectedOptions.remove(option)
+                }
+                else {
+                    selectedOptions.add(option)
+                }
+            }
+        )
+        Text(
+            text = option,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(10.dp)
+        )
+    }
 }
 
 @Composable
@@ -132,5 +160,25 @@ val defaultQuiz: List<Question> = listOf(
         "What is the capital of Spain?",
         listOf("Paris", "London", "Berlin", "Madrid"),
         listOf("Madrid")
+    ),
+    Question(
+        "Which of the following are considered planets in our solar system?",
+        listOf("Earth", "Pluto", "Jupiter", "Saturn"),
+        listOf("Earth", "Jupiter", "Saturn")
+    ),
+    Question(
+        "What is the largest ocean in the world?",
+        listOf("Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"),
+        listOf("Pacific Ocean")
+    ),
+    Question(
+        "What is the capital of Italy?",
+        listOf("Paris", "London", "Berlin", "Rome"),
+        listOf("Rome")
+    ),
+    Question(
+        "Which of the following animals are mammals?",
+        listOf("Elephant", "Black Mamba", "Lion", "Penguins", "Komoto Dragon"),
+        listOf("Elephant", "Lion")
     )
 )
