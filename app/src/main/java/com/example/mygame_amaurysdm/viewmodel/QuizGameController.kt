@@ -29,7 +29,9 @@ import com.example.mygame_amaurysdm.screens.quiz.QuizGameScreen
 
 @Composable
 fun Quiz(
-    modifier: Modifier, navController: NavHostController, quiz: Quiz = Quiz(
+    modifier: Modifier
+    , navController: NavHostController
+    , quiz: Quiz = Quiz(
         "Default Quiz ${UserBag.getCurrentUser().gradeBook.quizzes.size + 1}",
         defaultQuiz
     )
@@ -96,7 +98,6 @@ fun CheckBoxOption(option: String, selectedOptions: MutableList<String>) {
         Checkbox(
             checked = selectedOptions.contains(option)
             , onCheckedChange = {
-                //if (checked) selectedOptions.clear()
                 if (selectedOptions.contains(option)) {
                     selectedOptions.remove(option)
                 }

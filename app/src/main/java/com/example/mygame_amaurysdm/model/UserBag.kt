@@ -3,7 +3,7 @@ package com.example.mygame_amaurysdm.model
 object UserBag {
     private val users = mutableListOf<User>();
     private var usersCount = 0;
-    private var currentUser: User = User("", "", "");
+    private var currentUser: User = User("", "", "", "", "","");
 
     fun addUser(user: User) {
         users.add(user)

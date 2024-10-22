@@ -8,6 +8,9 @@ data class User(
     var username: String,
     var email: String,
     var password: String,
+    var firstName: String,
+    var lastName: String,
+    var dateOfBirth: String,
     var gradeBook: GradeBook = GradeBook()
 )
 
