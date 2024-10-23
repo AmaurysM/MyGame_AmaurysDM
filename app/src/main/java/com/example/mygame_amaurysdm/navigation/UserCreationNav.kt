@@ -14,7 +14,7 @@ import com.example.mygame_amaurysdm.screens.HomeScreen
 import com.example.mygame_amaurysdm.screens.SplashScreen
 import com.example.mygame_amaurysdm.screens.usercreation.LoginScreen
 import com.example.mygame_amaurysdm.screens.usercreation.OptionScreen
-import com.example.mygame_amaurysdm.viewmodel.Register
+import com.example.mygame_amaurysdm.screens.usercreation.Registration.RegisterScreen
 
 object UserCreationDestinations {
     const val LOGIN = "login"
@@ -66,7 +66,7 @@ fun UserCreationNavigation(
         }
 
         composable(UserCreationDestinations.REGISTER) {
-            Register(
+            RegisterScreen(
                 modifier = modifier, navController = navController
             )
         }
