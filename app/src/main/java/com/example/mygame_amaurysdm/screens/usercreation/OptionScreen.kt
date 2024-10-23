@@ -14,13 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.ui.theme.AppTheme
+import com.example.mygame_amaurysdm.viewmodel.IntroOptionsViewModel
 
 @Composable
 @Preview(showBackground = true)
 fun OptionScreen(
-    registerButton: () -> Unit = {},
-    loginButton: () -> Unit = {}
+    navController: NavHostController = rememberNavController(),
+    introOptionsViewModel: IntroOptionsViewModel = viewModel()
 ) {
 
     AppTheme {
@@ -57,14 +61,14 @@ fun OptionScreen(
             ) {
                 Button(
                     onClick = {
-                        registerButton()
+                        introOptionsViewModel.register(navController)
                     },
                     shape = MaterialTheme.shapes.small,
                     colors = ButtonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.background,
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
                         disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        disabledContentColor = MaterialTheme.colorScheme.secondary
+                        disabledContentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -73,14 +77,14 @@ fun OptionScreen(
 
                 Button(
                     onClick = {
-                        loginButton()
+                        introOptionsViewModel.login(navController)
                     },
                     shape = MaterialTheme.shapes.small,
                     colors = ButtonColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        contentColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                         disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        disabledContentColor = MaterialTheme.colorScheme.secondary
+                        disabledContentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {

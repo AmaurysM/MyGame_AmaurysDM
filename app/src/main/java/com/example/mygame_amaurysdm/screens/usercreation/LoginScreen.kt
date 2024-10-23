@@ -61,7 +61,9 @@ fun LoginScreen(
 
         OutlinedTextField(
             value = loginViewModel.loginData.email,
-            onValueChange = { loginViewModel.loginData = loginViewModel.loginData.copy(email = it) },
+            onValueChange = {
+                loginViewModel.loginData = loginViewModel.loginData.copy(email = it)
+            },
             label = { Text(text = "EMAIL") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -71,7 +73,9 @@ fun LoginScreen(
 
         OutlinedTextField(
             value = loginViewModel.loginData.password,
-            onValueChange = { loginViewModel.loginData = loginViewModel.loginData.copy(password = it) },
+            onValueChange = {
+                loginViewModel.loginData = loginViewModel.loginData.copy(password = it)
+            },
             label = { Text(text = "PASSWORD (8+ characters)") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -79,7 +83,11 @@ fun LoginScreen(
         )
 
         Button(
-            onClick = loginViewModel.navigateToHome(navController, loginViewModel.loginData),
+            onClick = {
+                if (loginViewModel.checkLogin(loginViewModel.loginData)) {
+                    loginViewModel.navigateToHome(navController)
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(5.dp)
         ) {

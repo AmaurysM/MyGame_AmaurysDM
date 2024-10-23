@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -128,10 +129,15 @@ fun NextButton(onButtonClick: () -> Unit, text: String) {
             onClick = {
                 onButtonClick()
             }, shape = MaterialTheme.shapes.medium
+            , colors = ButtonColors(
+                containerColor = MaterialTheme.colorScheme.onPrimaryContainer
+                , contentColor = MaterialTheme.colorScheme.primaryContainer
+                , disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer
+                , disabledContentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            )
         ) {
             Text(
                 text = text,
-                color = MaterialTheme.colorScheme.inversePrimary,
                 style = MaterialTheme.typography.titleMedium
             )
         }

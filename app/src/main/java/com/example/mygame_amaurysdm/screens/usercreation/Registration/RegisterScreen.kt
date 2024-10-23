@@ -57,17 +57,8 @@ fun RegisterScreen(
         }
 
         Spacer(modifier = Modifier.height(20.dp))
-         registerViewModel.screenState(navController)
 
-        /*when (accountStep.intValue) {
-            1 -> Step1(
-                registrationData, onRegistrationChange, onBackButtonClick, accountStep
-            )
-
-            2 -> Step2(
-                registrationData, onRegistrationChange, onCreateAccountClick, accountStep
-            )
-        }*/
+        registerViewModel.screenState(navController)
 
         HorizontalDivider(modifier = Modifier.padding(vertical = 10.dp))
 

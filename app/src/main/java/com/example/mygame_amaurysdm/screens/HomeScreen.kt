@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.R
 import com.example.mygame_amaurysdm.model.UserBag
 import com.example.mygame_amaurysdm.navigation.QuizNav
+import com.example.mygame_amaurysdm.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -32,8 +33,7 @@ import com.example.mygame_amaurysdm.navigation.QuizNav
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    userPicClick: () -> Unit = {},
-    onLogoClick: () -> Unit = {}
+    homeViewModel: HomeViewModel = HomeViewModel()
 
 ) {
 
@@ -48,7 +48,7 @@ fun HomeScreen(
                     Row(horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.clickable {
-                            userPicClick()
+                            homeViewModel.userPicClicked(navController)
                         }
                     ) {
                         Text(
@@ -67,7 +67,7 @@ fun HomeScreen(
                 },
                 title = {
                     Text(text = stringResource(R.string.app_name), modifier = Modifier.clickable {
-                        onLogoClick()
+                        homeViewModel.logoClicked(navController)
                     })
                 }
             )

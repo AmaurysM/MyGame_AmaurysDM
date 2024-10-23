@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.example.mygame_amaurysdm.model.UserBag
+import com.example.mygame_amaurysdm.navigation.HomeDestinations
+import com.example.mygame_amaurysdm.navigation.QuizDestinations
 import com.example.mygame_amaurysdm.navigation.UserCreationDestinations
 
 data class LoginData(var email: String, var password: String)
@@ -13,16 +15,33 @@ data class LoginData(var email: String, var password: String)
 class LoginViewModel : ViewModel() {
     var loginData by mutableStateOf(LoginData("", ""))
 
-    fun navigateToRegister(navController: NavHostController): () -> Unit {
+    /*fun navigateToRegister(navController: NavHostController): () -> Unit {
         val nav = navController.navigate(UserCreationDestinations.REGISTER) {
             popUpTo(navController.graph.startDestinationId) {
                 inclusive = true
             }
         }
         return { nav }
+    }*/
+
+    val navigateToRegister: (navController: NavHostController) -> Unit = { navController ->
+        navController.navigate(UserCreationDestinations.REGISTER) {
+            popUpTo(navController.graph.startDestinationId) {
+                inclusive = true
+            }
+        }
     }
 
-    fun navigateToHome(navController: NavHostController, loginData: LoginData): () -> Unit {
+    val navigateToHome: (navController: NavHostController) -> Unit =
+        { navController ->
+            navController.navigate(HomeDestinations.HOME) {
+                popUpTo(navController.graph.startDestinationId) {
+                    inclusive = true
+                }
+            }
+        }
+
+    /*fun navigateToHome(navController: NavHostController, loginData: LoginData): () -> Unit {
         val nav = if (checkLogin(loginData)) {
             navController.navigate(UserCreationDestinations.HOME) {
                 popUpTo(navController.graph.startDestinationId) {
@@ -33,7 +52,7 @@ class LoginViewModel : ViewModel() {
 
         }
         return { nav }
-    }
+    }*/
 
     fun checkLogin(loginData: LoginData): Boolean {
         val user =

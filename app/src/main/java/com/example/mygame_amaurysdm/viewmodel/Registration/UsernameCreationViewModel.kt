@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.example.mygame_amaurysdm.model.User
 import com.example.mygame_amaurysdm.model.UserBag
+import com.example.mygame_amaurysdm.navigation.HomeDestinations
+import com.example.mygame_amaurysdm.navigation.QuizDestinations
+import com.example.mygame_amaurysdm.navigation.UserCreationDestinations
 
 class UsernameCreationViewModel : ViewModel() {
     val onCreateAccountClick: (navController: NavHostController) -> Unit = { navController ->
-
-        navController.navigate("home") {
+        navController.navigate(HomeDestinations.HOME) {
             popUpTo(navController.graph.startDestinationId) {
                 inclusive = true
             }
