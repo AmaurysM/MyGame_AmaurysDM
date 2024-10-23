@@ -12,8 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.screens.HomeScreen
 import com.example.mygame_amaurysdm.screens.SplashScreen
+import com.example.mygame_amaurysdm.screens.usercreation.LoginScreen
 import com.example.mygame_amaurysdm.screens.usercreation.OptionScreen
-import com.example.mygame_amaurysdm.viewmodel.Login
 import com.example.mygame_amaurysdm.viewmodel.Register
 
 object UserCreationDestinations {
@@ -62,9 +62,7 @@ fun UserCreationNavigation(
         }
 
         composable(UserCreationDestinations.LOGIN) {
-            Login(
-                modifier = modifier, navController = navController
-            )
+            LoginScreen(modifier,navController)
         }
 
         composable(UserCreationDestinations.REGISTER) {

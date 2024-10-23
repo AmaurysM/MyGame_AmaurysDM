@@ -23,17 +23,19 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.R
-import com.example.mygame_amaurysdm.viewmodel.LoginData
+import com.example.mygame_amaurysdm.viewmodel.LoginViewModel
 
 
 @Preview(showBackground = true, device = "id:pixel_8a")
 @Composable
 fun LoginScreen(
-    loginData: LoginData = LoginData("email@example.com", "******"),
-    onLoginChange: (LoginData) -> Unit = {},
-    onCreateAccountClick: () -> Unit = {},
-    onLoginClick: () -> Unit = {}
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    loginViewModel: LoginViewModel = viewModel(),
 ) {
     Column(
         modifier = Modifier
@@ -58,8 +60,8 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = loginData.email,
-            onValueChange = { onLoginChange(loginData.copy(email = it)) },
+            value = loginViewModel.loginData.email,
+            onValueChange = { loginViewModel.loginData = loginViewModel.loginData.copy(email = it) },
             label = { Text(text = "EMAIL") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,8 +70,8 @@ fun LoginScreen(
         )
 
         OutlinedTextField(
-            value = loginData.password,
-            onValueChange = { onLoginChange(loginData.copy(password = it)) },
+            value = loginViewModel.loginData.password,
+            onValueChange = { loginViewModel.loginData = loginViewModel.loginData.copy(password = it) },
             label = { Text(text = "PASSWORD (8+ characters)") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,7 +79,7 @@ fun LoginScreen(
         )
 
         Button(
-            onClick = onLoginClick,
+            onClick = loginViewModel.navigateToHome(navController, loginViewModel.loginData),
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(5.dp)
         ) {
@@ -96,7 +98,7 @@ fun LoginScreen(
                 text = "Create One",
                 fontWeight = FontWeight.Thin,
                 modifier = Modifier
-                    .clickable { onCreateAccountClick() }
+                    .clickable { loginViewModel.navigateToRegister(navController) }
                     .padding(start = 5.dp),
                 color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline
             )
