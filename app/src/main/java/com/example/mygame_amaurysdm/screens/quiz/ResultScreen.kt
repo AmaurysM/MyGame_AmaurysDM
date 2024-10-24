@@ -30,7 +30,9 @@ fun ResultScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(10.dp)
+            .padding(10.dp),
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         when (user.gradeBook.quizzes.size) {
             0 -> {

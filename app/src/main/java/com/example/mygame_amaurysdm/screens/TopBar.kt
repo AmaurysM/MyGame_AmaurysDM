@@ -24,21 +24,21 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.mygame_amaurysdm.R
 import com.example.mygame_amaurysdm.model.UserBag
-import com.example.mygame_amaurysdm.navigation.QuizNav
-import com.example.mygame_amaurysdm.viewmodel.HomeViewModel
+import com.example.mygame_amaurysdm.viewmodel.TopBarViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun HomeScreen(
+fun TopBar(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    homeViewModel: HomeViewModel = HomeViewModel()
+    topBarViewModel: TopBarViewModel = TopBarViewModel(),
+    visible: Boolean = true
 
 ) {
 
-    Scaffold(
-        topBar = {
+    /*Scaffold(
+        topBar = {*/
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -48,11 +48,11 @@ fun HomeScreen(
                     Row(horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.clickable {
-                            homeViewModel.userPicClicked(navController)
+                            topBarViewModel.userPicClicked(navController)
                         }
                     ) {
                         Text(
-                            text = (UserBag.getCurrentUser()?.username ?: "*****").uppercase(),
+                            text = (UserBag.getCurrentUser().username ?: "*****").uppercase(),
                             modifier = Modifier.padding(end = 10.dp)
                         )
                         Icon(
@@ -67,12 +67,12 @@ fun HomeScreen(
                 },
                 title = {
                     Text(text = stringResource(R.string.app_name), modifier = Modifier.clickable {
-                        homeViewModel.logoClicked(navController)
+                        topBarViewModel.logoClicked(navController)
                     })
                 }
             )
-        }, content = { padding ->
+        /*}, content = { padding ->
             QuizNav(Modifier.padding(padding), navController)
         }
-    )
+    )*/
 }
